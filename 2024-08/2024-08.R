@@ -11,10 +11,12 @@ grid <-
     "")
 
 in_grid <- function(row, col) {
-  return (row > 0 & 
+  res <- (row > 0 & 
           row <= length(grid) &
           col > 0 &
-          col <= length(grid[[1]])) 
+          col <= length(grid[[1]]))
+  
+  res
 }
 
 count_resonance <- 0
@@ -65,9 +67,9 @@ for (row in seq_along(grid)) {
               in_grid(
                 row + (row2 - row) * factor,
                 col + (col2 - col) * factor)) {
-              if (mark_grid[[row + (row2- row) * factor]][[col + (col2 - col) * factor]] != "#") {
+              if (mark_grid[[row + (row2 - row) * factor]][[col + (col2 - col) * factor]] != "#") {
                 count_resonance <- count_resonance + 1
-                mark_grid[[row + (row2 - row) * factor]][[col + (col2 + col) * factor]] = "#"
+                mark_grid[[row + (row2 - row) * factor]][[col + (col2 - col) * factor]] = "#"
               }
               factor <- factor + 1
             }             
@@ -77,3 +79,5 @@ for (row in seq_along(grid)) {
     }
   }
 }
+
+count_resonance
